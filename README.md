@@ -57,7 +57,7 @@ NODE_ENV=development
 
 2. You need a mysql server working.
 
-3. Create the mysql database, that in our case is "db_motorbikes_dev". You can import it from the file db_motorbikes_dev.sql included in this project. https://github.com/tcrurav/Ionic5NodeAuthBasic/blob/master/db_motorbikes_dev.sql
+3. Create the mysql database, that in our case is "db_motorbikes_dev". You can import it from the file db_motorbikes_dev.sql included in this project. https://github.com/tcrurav/Ionic5NodeAuthBasic/blob/master/backend/db_motorbikes_dev.sql
 
 
 Finally to start enjoying this project.
