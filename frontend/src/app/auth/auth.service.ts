@@ -63,7 +63,6 @@ export class AuthService {
   async isLoggedIn() {
     // return this.authSubject.asObservable();
     let token = await this.storage.get("token");
-    console.log(token)
     if (token){ //Just check if exists. This should be checked with current date
       return true;
     }

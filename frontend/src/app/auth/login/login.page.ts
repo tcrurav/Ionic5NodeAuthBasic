@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
       this.router.navigateByUrl('/you-are-logged-in');
       form.reset();
     }, err => {
-      this.presentAlert('server not available');
+      this.presentAlert("Error");
     });
   }
 

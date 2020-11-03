@@ -13,7 +13,7 @@ export class HomePage {
 
   loginOrJustEnter(){
     this.authService.isLoggedIn().then(loggedIn => {
-      console.log(loggedIn)
+
       if(loggedIn){
         this.router.navigateByUrl("/you-are-logged-in");
         return;

@@ -25,8 +25,6 @@ exports.create = (req, res) => {
   User.findOne({ where: { username: user.username } })
     .then(data => {
       if (data) {
-        console.log("hola")
-        console.log(data)
         const result = bcrypt.compareSync(user.password, data.password);
         if (!result) return res.status(401).send('Password not valid!');
         const token = utils.generateToken(data);
@@ -36,11 +34,8 @@ exports.create = (req, res) => {
         return res.json({ user: userObj, access_token: token });
       }
 
-      console.log("antes de adiós")
       user.password = bcrypt.hashSync(req.body.password);
 
-      console.log("adiós")
-      console.log(user)
       // User not found. Save new User in the database
       User.create(user)
         .then(data => {
