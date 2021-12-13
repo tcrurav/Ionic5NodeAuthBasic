@@ -51,6 +51,7 @@ export class AuthService {
 
         if (res.user) {
           await this.storage.set("token", res.access_token);
+          // await this.storage.set("idUser", res.user.id);
         }
       })
     );
