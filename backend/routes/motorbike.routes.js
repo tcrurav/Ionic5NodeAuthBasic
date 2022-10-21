@@ -22,5 +22,5 @@ module.exports = app => {
     // Delete a Motorbikes with id
     router.delete("/:id", auth.isAuthenticated, motorbikes.delete);
 
-    app.use('/api/motorbike', router);
+    app.use('/api/motorbikes', router);
 };

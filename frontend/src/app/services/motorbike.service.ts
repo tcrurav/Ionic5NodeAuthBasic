@@ -1,14 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { User } from '../auth/user';
+import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class MotorbikeService {
 
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:4000';
 
@@ -29,16 +26,9 @@ export class UserService {
     return options;
   }
 
-  getUsers(token) {
+  getMotorbikes(token) {
     let myOptions = this.getOptions(token);
     console.log(myOptions)
-    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/api/users`, myOptions);
-
-
-    // return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/api/users`, myOptions).pipe(
-    //   tap(function (res) {
-    //       console.log(res);
-    //     })
-    // );
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/api/motorbikes`, myOptions);
   }
 }

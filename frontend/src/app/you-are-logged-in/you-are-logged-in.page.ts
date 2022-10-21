@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
-import { UserService } from '../services/user.service';
+import { MotorbikeService } from '../services/motorbike.service';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -11,19 +11,27 @@ import { Storage } from '@ionic/storage';
 })
 export class YouAreLoggedInPage implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, private userService: UserService,
+  constructor(private authService: AuthService, private router: Router, private motorbikeService: MotorbikeService,
     private storage: Storage) { }
 
   ngOnInit() {
-    this.getUsers();
+    this.getMotorbikes();
   }
 
-  async getUsers() {
+  ionViewDidEnter(){
+    this.getMotorbikes();
+  }
+
+  async getMotorbikes() {
     let token = await this.storage.get("token");
-    this.userService.getUsers(token).subscribe(res => {
-      console.log("resultado");
+    this.motorbikeService.getMotorbikes(token).subscribe(res => {
+      console.log("User Logged in. This is the motorbike list:");
       console.log(res);
-    })
+    }, error => {
+      console.log(error);
+      console.log("User not authenticated. Please log in");
+      this.router.navigateByUrl("/home");
+    });
   }
 
   logout() {

@@ -8,8 +8,11 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 4000;
  
+var corsOptions = {
+  origin: "http://localhost:8100"
+};
 // enable CORS
-app.use(cors());
+app.use(cors(corsOptions));
 
 // parse application/json
 app.use(bodyParser.json());
