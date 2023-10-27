@@ -1,9 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { User } from '../auth/user';
-import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Storage } from '@ionic/storage';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ export class MotorbikeService {
 
   constructor(private  httpClient:  HttpClient, private  storage:  Storage) { }
 
-  private getOptions(token){
+  private getOptions(token: string){
 
     let bearerAccess = 'Bearer ' + token;
 
@@ -26,7 +25,7 @@ export class MotorbikeService {
     return options;
   }
 
-  getMotorbikes(token) {
+  getMotorbikes(token: string) {
     let myOptions = this.getOptions(token);
     console.log(myOptions)
     return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/api/motorbikes`, myOptions);

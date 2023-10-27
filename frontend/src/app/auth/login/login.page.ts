@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { YouAreLoggedInPageRoutingModule } from 'src/app/you-are-logged-in/you-are-logged-in-routing.module';
 import { AuthService } from '../auth.service';
+import { AlertController } from '@ionic/angular';
 import { User } from '../user';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,23 +13,23 @@ import { User } from '../user';
 export class LoginPage implements OnInit {
 
   constructor(
-    private router: Router, 
-    private authService: AuthService, 
+    private router: Router,
+    private authService: AuthService,
     private alertController: AlertController) { }
 
   ngOnInit() {
   }
 
-  login(form){
+  login(form: NgForm) {
     let user: User = {
-      id: null,
+      // id: null,
       username: form.value.email,
       password: form.value.password,
-      name: null,
-      isAdmin: null
+      // name: null,
+      // isAdmin: null
     };
-    this.authService.login(user).subscribe((res)=>{
-      if(!res.access_token) {
+    this.authService.login(user).subscribe((res) => {
+      if (!res.access_token) {
         this.presentAlert("invalid credentials");
         return;
       }
@@ -51,4 +51,5 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   }
+
 }

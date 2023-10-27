@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +16,9 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  register(form) {
+  register(form: NgForm) {
     let user: User = {
-      id: null,
+      // id: null,
       username: form.value.email,
       password: form.value.password,
       name: form.value.name,
