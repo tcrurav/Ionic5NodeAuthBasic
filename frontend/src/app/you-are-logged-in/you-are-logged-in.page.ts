@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { MotorbikeService } from '../services/motorbike.service';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-you-are-logged-in',
@@ -11,10 +11,13 @@ import { Storage } from '@ionic/storage';
 })
 export class YouAreLoggedInPage implements OnInit {
 
+  initialized: boolean = false;
+
   constructor(private authService: AuthService, private router: Router, private motorbikeService: MotorbikeService,
     private storage: Storage) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    if(!this.initialized) await this.storage.create();
     this.getMotorbikes();
   }
 

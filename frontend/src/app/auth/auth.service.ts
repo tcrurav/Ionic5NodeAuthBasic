@@ -3,26 +3,35 @@ import { Injectable } from '@angular/core';
 import { User } from './user';
 import { Observable, tap } from 'rxjs';
 import { AuthResponse } from './auth-response';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:4000';
+  initialized: boolean = false;
 
-  constructor(private  httpClient:  HttpClient, private  storage:  Storage) { }
+  AUTH_SERVER_ADDRESS: string = 'http://localhost:4000';
 
-  private getOptions(user: User){
+  constructor(private httpClient: HttpClient, private storage: Storage) { }
+
+  // async ngOnInit() {
+  //   // If using a custom driver:
+  //   // await this.storage.defineDriver(MyCustomDriver)
+  //   if (!this.initialized) await this.storage.create();
+  // }
+
+
+  private getOptions(user: User) {
     let base64UserAndPassword = window.btoa(user.username + ":" + user.password);
 
     let basicAccess = 'Basic ' + base64UserAndPassword;
 
     let options = {
       headers: {
-        'Authorization' : basicAccess,
-        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Authorization': basicAccess,
+        'Content-Type': 'application/x-www-form-urlencoded',
       }
       //, withCredentials: true
     };
@@ -33,7 +42,7 @@ export class AuthService {
 
   register(user: User): Observable<AuthResponse> {
     return this.httpClient.post<AuthResponse>(`${this.AUTH_SERVER_ADDRESS}/api/users/`, user, this.getOptions(user)).pipe(
-      tap(async (res:  AuthResponse ) => {
+      tap(async (res: AuthResponse) => {
 
         if (res.user) {
           await this.storage.set("token", res.access_token);
@@ -62,7 +71,7 @@ export class AuthService {
   async isLoggedIn() {
     // return this.authSubject.asObservable();
     let token = await this.storage.get("token");
-    if (token){ //Just check if exists. This should be checked with current date
+    if (token) { //Just check if exists. This should be checked with current date
       return true;
     }
     return false;

@@ -8,7 +8,7 @@ export class MotorbikeService {
 
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:4000';
 
-  constructor(private  httpClient:  HttpClient, private  storage:  Storage) { }
+  constructor(private  httpClient:  HttpClient) { }
 
   private getOptions(token: string){
 
